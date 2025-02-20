@@ -1,20 +1,49 @@
-import React from "react" ;
-import {Routes, Route } from "react-router-dom"; 
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Remise from "./components/Remise/Remise";
-import Evenement from "./components/Evenement/Evenement";
 import EventsSection from "./components/Filtrer/EventsSection";
 import Inscrire from "./components/Inscrire/Inscrire";
 import Description from "./components/Description/Description";
 import Footer from "./components/Footer/Footer";
 
-
 import AOS from "aos";
 import "aos/dist/aos.css";
-import EventDetail from "./pages/eventDetail/EventDetail";
 
-const App =() => {
-  React.useEffect(() => {
+import Card1 from "./components/lesPages/Card1";
+import Card2 from "./components/lesPages/Card2";
+import Card3 from "./components/lesPages/Card3";
+import Card4 from "./components/lesPages/Card4";
+import Card5 from "./components/lesPages/Card5";
+import CardSection from "./components/lesPages/CardSection";
+import Evenement from "./components/Evenement/Evenement";
+import Popup from "./components/Popup/Popup";
+
+const Home = () => {
+  // Déplace l'état ici
+  const [orderPopup, setOrderPopup] = useState(false);
+
+  const handleOrderPopup = () => {
+    setOrderPopup(!orderPopup);
+  };
+
+  return (
+    <>
+      <Navbar handleOrderPopup={handleOrderPopup} />
+      <Remise handleOrderPopup={handleOrderPopup} />
+      <CardSection />
+      <EventsSection />
+      <Inscrire />
+      <Description />
+     
+      <Footer />
+      <Popup orderPopup={orderPopup} setOrderPopup={setOrderPopup} />
+    </>
+  );
+};
+
+const App = () => {
+  useEffect(() => {
     AOS.init({
       offset: 100,
       duration: 800,
@@ -25,21 +54,17 @@ const App =() => {
   }, []);
 
   return (
-  <div >
-    
-    <Navbar/>
-    <Remise/>
-    <Routes>
-    <Evenement/>
-   
-   </Routes>
-    <EventsSection/>
-    <Inscrire/>
-    <Description/>
-   <Footer/>
-   
-
-  </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/Card1" element={<Card1 />} />
+        <Route path="/Card2" element={<Card2 />} />
+        <Route path="/Card3" element={<Card3 />} />
+        <Route path="/Card4" element={<Card4 />} />
+        <Route path="/Card5" element={<Card5 />} />
+      </Routes>
+    </Router>
   );
- };
- export default App ;
+};
+
+export default App;

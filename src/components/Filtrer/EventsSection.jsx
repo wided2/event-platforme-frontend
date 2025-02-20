@@ -14,13 +14,13 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import EventCard from "./EventCard";
 
 const events = [
-  { id: 1, img: Image1, title: "coaching", date: "17/02/2025", location: "sfax" },
-  { id: 2, img: Image2, title: "communauté", date: "17/02/2025", location: "ariena " },
-  { id: 3, img: Image3, title: "Nettoyages ", date: "17/02/2025", location: "nabeul:kélibia" },
-  { id: 4, img: Image4, title: "Professionnel", date: "18/02/2025", location: "centre urbain" },
-  { id: 5, img: Image5, title: "sport", date: "18/02/2025", location: "sousse" },
+  { id: 1, img: Image1, title: "coaching", date: "19/02/2025", location: "sfax" },
+  { id: 2, img: Image2, title: "communauté", date: "19/02/2025", location: "ariena " },
+  { id: 3, img: Image3, title: "Nettoyages ", date: "19/02/2025", location: "nabeul:kélibia" },
+  { id: 4, img: Image4, title: "Professionnel", date: "20/02/2025", location: "centre urbain" },
+  { id: 5, img: Image5, title: "sport", date: "20/02/2025", location: "sousse" },
   { id: 6, img: Image6, title: "Célébrations et Fêtes", date: "18/02/2025", location: "sousse" },
-  { id: 7, img: Image7, title: "Communautaire et Caritatif", date: "22/02/2025", location: "monastirnabeul:hammamet" },
+  { id: 7, img: Image7, title: "Communautaire et Caritatif", date: "20/02/2025", location: "monastirnabeul:hammamet" },
   { id: 8, img: Image8, title: "Éducation ", date: "22/02/2025", location: "Sfax" },
   { id: 9, img: Image9, title: "Marchés et Foires", date: "22/02/2025", location: "Béja" },
   { id: 10, img: Image10, title: "Formation", date: "23/02/2025", location: "centre elif" },

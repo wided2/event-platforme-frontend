@@ -6,18 +6,13 @@ import Image1 from "../../assets/evenement/coaching.jpg";
 import Image2 from "../../assets/evenement/communauté.jpg";
 import Image3 from "../../assets/evenement/Nettoyages.jpg";
 import Image4 from "../../assets/evenement/Professionnel.jpg";
-import Image5 from "../../assets/evenement/sport.jpg";
+
 
 import { FaStar } from "react-icons/fa6";
 
 const EvenementData = [
   {
-    id: 1,
-    img: Image1,
-    title: "Développement Personnel",
-    rating: 5.0,
-    aosDelay: "0",
-    prix:"160dt",
+    id: 1,img: Image1,title: "Développement Personnel",rating: 5.0,aosDelay: "0",prix:"160dt",
   },
   {
     id: 2,
@@ -43,14 +38,7 @@ const EvenementData = [
     aosDelay: "600",
     prix:"80dt",
   },
-  {
-    id: 5,
-    img: Image5,
-    title: "Sport et Bien-être",
-    rating: 4.5,
-    aosDelay: "800",
-    prix:"120DT",
-  },
+ 
 ];
 
 const Evenement = () => {

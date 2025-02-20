@@ -18,7 +18,7 @@ const ImageList = [
         title: "70% de réduction sur tous les evenement",
        },]
 
-const Remise = () => {
+    const Remise = ({ handleOrderPopup }) => {
     var settings = {
         dots: false,
         arrows: false,
@@ -45,9 +45,14 @@ const Remise = () => {
              <div className="grid grid-cols-1 sm:grid-cols-2">
                 {/*contenue de offre */}
                  <div className="flex flex-col justify-center gap-4 pt-12 sm:pt-0 text-center sm:text-left order-2 sm:order-1 relative z-10">
-                    <h1 className="text-5xl sm:text-6xl font-bold">{data.title}</h1>
+                    <h1 className="text-5xl sm:text-6xl font-bold">
+                        {data.title}
+                        </h1>
                     <div className="flex justify-end pr-4 sm:justify-start sm:pr-0 ">
-                    <button className="bg-orange-600 hover:bg-orange-700 transition-transform transform hover:scale-105 text-white py-3 px-6 rounded-full shadow-lg">
+                    <button
+                    onClick={handleOrderPopup}
+ 
+                    className="bg-orange-600 hover:bg-orange-700 transition-transform transform hover:scale-105 text-white py-3 px-6 rounded-full shadow-lg">
                        Voir
                     </button>
                     </div>
