@@ -4,9 +4,11 @@ import { IoCloseOutline, IoMail, IoLockClosed, IoPerson } from "react-icons/io5"
 const Popup = ({ orderPopup, setOrderPopup }) => {
   const [registerPopup, setRegisterPopup] = useState(false);
   const [forgotPasswordPopup, setForgotPasswordPopup] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
   return (
     <>
+      {/* Popup de connexion */}
       {orderPopup && (
         <div className="popup">
           <div className="h-screen w-screen fixed top-0 left-0 bg-black/50 z-50 backdrop-blur-sm">
@@ -19,6 +21,14 @@ const Popup = ({ orderPopup, setOrderPopup }) => {
                   onClick={() => setOrderPopup(false)}
                 />
               </div>
+              
+              {/* Message de succès */}
+              {successMessage && (
+                <div className="text-green-500 text-center mb-2">
+                  {successMessage}
+                </div>
+              )}
+
               {/* form section */}
               <div className="mt-4">
                 <div className="relative mb-4">
@@ -48,32 +58,37 @@ const Popup = ({ orderPopup, setOrderPopup }) => {
                   >
                     Mot de passe oublié ?
                   </button>
-                 
                 </div>
                 <div className="flex justify-center mt-4">
-                  <button className="bg-gradient-to-r from-orange-400 to-orange-600 hover:scale-105 duration-200 text-white py-1 px-4 rounded-full flex items-center gap-2">
-                    Se connecter
+                  <button
+                    className="bg-gradient-to-r from-orange-400 to-orange-600 hover:scale-105 duration-200 text-white py-1 px-4 rounded-full flex items-center gap-2"
+                    onClick={() => {
+                      // Redirection vers le dashboard utilisateur
+                      window.location.href = "/dashboard";
+                    }}
+                  >
+                    Connecter
                   </button>
                 </div>
                 <div className="flex justify-center-end gap-2 text-sm mt-2">
-  <p className="text-black">Nouveau ici?</p>
-  <button
-    className="text-blue-500 hover:underline"
-    onClick={() => {
-      setOrderPopup(false);
-      setRegisterPopup(true);
-    }}
-  >
-    Créer un compte
-  </button>
-</div>
-
+                  <p className="text-black">Nouveau ici?</p>
+                  <button
+                    className="text-blue-500 hover:underline"
+                    onClick={() => {
+                      setOrderPopup(false);
+                      setRegisterPopup(true);
+                    }}
+                  >
+                    Créer un compte
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       )}
 
+      {/* Popup d'inscription */}
       {registerPopup && (
         <div className="popup">
           <div className="h-screen w-screen fixed top-0 left-0 bg-black/50 z-50 backdrop-blur-sm">
@@ -111,7 +126,14 @@ const Popup = ({ orderPopup, setOrderPopup }) => {
                   />
                 </div>
                 <div className="flex justify-center">
-                  <button className="bg-gradient-to-r from-orange-400 to-orange-600 hover:scale-105 duration-200 text-white py-1 px-4 rounded-full flex items-center gap-2">
+                  <button
+                    className="bg-gradient-to-r from-orange-400 to-orange-600 hover:scale-105 duration-200 text-white py-1 px-4 rounded-full flex items-center gap-2"
+                    onClick={() => {
+                      setSuccessMessage("Compte créé avec succès !");
+                      setRegisterPopup(false);
+                      setOrderPopup(true);
+                    }}
+                  >
                     S'inscrire
                   </button>
                 </div>
@@ -121,6 +143,7 @@ const Popup = ({ orderPopup, setOrderPopup }) => {
         </div>
       )}
 
+      {/* Popup mot de passe oublié */}
       {forgotPasswordPopup && (
         <div className="popup">
           <div className="h-screen w-screen fixed top-0 left-0 bg-black/50 z-50 backdrop-blur-sm">

@@ -18,8 +18,8 @@ const BannerImg = {
 };
 
 const FooterLinks = [
-  { title: "Home", link: "/#" },
-  { title: "About", link: "/#about" },
+  { title: "Accueil", link: "/#" },
+  { title: "À propos", link: "/#about" },
   { title: "Contact", link: "/#contact" },
   { title: "Blog", link: "/#blog" },
 ];
@@ -27,79 +27,45 @@ const FooterLinks = [
 const Footer = () => {
   return (
     <div style={BannerImg} className="text-white py-10 mt-20">
-
       <div className="container mx-auto px-6">
-        <div data-aos="zoom-in" className="grid md:grid-cols-3 gap-10 pb-20 pt-5">
-          {/* Company details */}
-          <div className="py-8 px-4">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum in
-              beatae ea recusandae blanditiis veritatis.
+        <div data-aos="zoom-in" className="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 pt-5">
+          
+          {/* Infos sur la société */}
+          <div className="md:col-span-1 text-center md:text-left">
+            <h2 className="text-xl font-bold mb-4">À propos</h2>
+            <p className="text-gray-200">
+              Nous organisons des événements exceptionnels pour toutes les occasions.
+              Restez informé et participez à nos offres exclusives.
             </p>
           </div>
 
-          {/* Footer Links */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 col-span-2 md:pl-10 gap-10">
-            <div>
-              <div className="py-8 px-4">
-                <h1 className="sm:text-xl text-xl font-bold sm:text-left text-center mb-4">
-                  Important Links
-                </h1>
-                <ul className="flex flex-col gap-4">
-                  {FooterLinks.map((link) => (
-                    <li
-                      className="cursor-pointer hover:text-primary hover:translate-x-1 duration-300 text-gray-200"
-                      key={link.title}
-                    >
-                      <span>{link.title}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div>
-              <div className="py-8 px-4">
-                <h1 className="sm:text-xl text-xl font-bold sm:text-left text-center mb-4">
-                  Links
-                </h1>
-                <ul className="flex flex-col gap-4">
-                  {FooterLinks.map((link) => (
-                    <li
-                      className="cursor-pointer hover:text-primary hover:translate-x-1 duration-300 text-gray-200"
-                      key={link.title}
-                    >
-                      <span>{link.title}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+          {/* Liens utiles */}
+          <div className="md:col-span-1 text-center md:text-left">
+            <h2 className="text-xl font-bold mb-4">Liens utiles</h2>
+            <ul className="flex flex-col gap-2">
+              {FooterLinks.map((link) => (
+                <li key={link.title} className="cursor-pointer hover:text-orange-400 transition-all">
+                  <a href={link.link}>{link.title}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            {/* Social links & Contact */}
-            <div>
-              <div className="mt-6 flex flex-col gap-6">
-                <div className="flex items-center gap-4">
-                  <a href="#">
-                    <FaInstagram className="text-3xl" />
-                  </a>
-                  <a href="#">
-                    <FaFacebook className="text-3xl" />
-                  </a>
-                  <a href="#">
-                    <FaLinkedin className="text-3xl" />
-                  </a>
-                </div>
-                <div className="mt-4">
-                  <div className="flex items-center gap-3">
-                    <FaLocationArrow />
-                    <p>Nabeul,Kélibia</p>
-                  </div>
-                  <div className="flex items-center gap-3 mt-3">
-                    <FaMobileAlt />
-                    <p>+216 52067885</p>
-                  </div>
-                </div>
-              </div>
+          {/* Réseaux sociaux & Contact */}
+          <div className="md:col-span-1 text-center md:text-left">
+            <h2 className="text-xl font-bold mb-4">Contact</h2>
+            <div className="flex justify-center md:justify-start gap-4 mb-4">
+              <a href="#" className="hover:text-orange-400"><FaInstagram className="text-3xl" /></a>
+              <a href="#" className="hover:text-orange-400"><FaFacebook className="text-3xl" /></a>
+              <a href="#" className="hover:text-orange-400"><FaLinkedin className="text-3xl" /></a>
+            </div>
+            <div className="text-gray-200">
+              <p className="flex items-center justify-center md:justify-start gap-2">
+                <FaLocationArrow /> Nabeul, Kélibia
+              </p>
+              <p className="flex items-center justify-center md:justify-start gap-2 mt-2">
+                <FaMobileAlt /> +216 52067885
+              </p>
             </div>
           </div>
         </div>

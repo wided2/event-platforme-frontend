@@ -15,13 +15,13 @@ import EventCard from "./EventCard";
 
 const events = [
   { id: 1, img: Image1, title: "coaching", date: "19/02/2025", location: "sfax" },
-  { id: 2, img: Image2, title: "communauté", date: "19/02/2025", location: "ariena " },
-  { id: 3, img: Image3, title: "Nettoyages ", date: "19/02/2025", location: "nabeul:kélibia" },
+  { id: 2, img: Image2, title: "communauté", date: "19/02/2025", location: "ariena" },
+  { id: 3, img: Image3, title: "Nettoyages", date: "19/02/2025", location: "nabeul:kélibia" },
   { id: 4, img: Image4, title: "Professionnel", date: "20/02/2025", location: "centre urbain" },
   { id: 5, img: Image5, title: "sport", date: "20/02/2025", location: "sousse" },
   { id: 6, img: Image6, title: "Célébrations et Fêtes", date: "18/02/2025", location: "sousse" },
   { id: 7, img: Image7, title: "Communautaire et Caritatif", date: "20/02/2025", location: "monastirnabeul:hammamet" },
-  { id: 8, img: Image8, title: "Éducation ", date: "22/02/2025", location: "Sfax" },
+  { id: 8, img: Image8, title: "Éducation", date: "22/02/2025", location: "Sfax" },
   { id: 9, img: Image9, title: "Marchés et Foires", date: "22/02/2025", location: "Béja" },
   { id: 10, img: Image10, title: "Formation", date: "23/02/2025", location: "centre elif" },
 ];
@@ -41,31 +41,31 @@ const EventsSection = () => {
 
   const filterEvents = (filterType) => {
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Réinitialiser l'heure à minuit
-  
+    today.setHours(0, 0, 0, 0);
+
     const tomorrow = new Date(today);
     tomorrow.setDate(today.getDate() + 1);
-    tomorrow.setHours(0, 0, 0, 0); // Réinitialiser l'heure à minuit
-  
+    tomorrow.setHours(0, 0, 0, 0);
+
     const weekendStart = new Date(today);
     weekendStart.setDate(today.getDate() + (6 - today.getDay()));
     weekendStart.setHours(0, 0, 0, 0);
-  
+
     const weekendEnd = new Date(weekendStart);
     weekendEnd.setDate(weekendStart.getDate() + 1);
-    weekendEnd.setHours(23, 59, 59, 999); // La fin du week-end
-  
-    let filtered;//Initialisation de la variable
+    weekendEnd.setHours(23, 59, 59, 999);
+
+    let filtered;
     if (filterType === "today") {
       filtered = events.filter((event) => {
         const eventDate = new Date(event.date.split("/").reverse().join("-"));
-        eventDate.setHours(0, 0, 0, 0); // Réinitialiser l'heure de l'événement à minuit
+        eventDate.setHours(0, 0, 0, 0);
         return eventDate.getTime() === today.getTime();
       });
     } else if (filterType === "tomorrow") {
       filtered = events.filter((event) => {
         const eventDate = new Date(event.date.split("/").reverse().join("-"));
-        eventDate.setHours(0, 0, 0, 0); // Réinitialiser l'heure de l'événement à minuit
+        eventDate.setHours(0, 0, 0, 0);
         return eventDate.getTime() === tomorrow.getTime();
       });
     } else if (filterType === "weekend") {
@@ -77,12 +77,12 @@ const EventsSection = () => {
     } else {
       filtered = events;
     }
-  
+
     setFilteredEvents(filtered);
     setCurrentIndex(0);
     setSelectedFilter(filterType);
   };
-  
+
   return (
     <div className="w-full py-10 bg-white">
       <h2 className="text-2xl font-bold text-center text-orange-400 uppercase">
@@ -114,6 +114,7 @@ const EventsSection = () => {
         <button
           onClick={prevSlide}
           className="absolute left-0 top-1/2 transform -translate-y-1/2 p-2 bg-white shadow-md rounded-full"
+          aria-label="Previous event"
         >
           <FaChevronLeft />
         </button>
@@ -127,12 +128,11 @@ const EventsSection = () => {
         <button
           onClick={nextSlide}
           className="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 bg-white shadow-md rounded-full"
+          aria-label="Next event"
         >
           <FaChevronRight />
         </button>
       </div>
-
-      
     </div>
   );
 };

@@ -16,7 +16,7 @@ import Card3 from "./components/lesPages/Card3";
 import Card4 from "./components/lesPages/Card4";
 import Card5 from "./components/lesPages/Card5";
 import CardSection from "./components/lesPages/CardSection";
-import Evenement from "./components/Evenement/Evenement";
+
 import Popup from "./components/Popup/Popup";
 
 const Home = () => {
