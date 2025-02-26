@@ -33,10 +33,10 @@ const Remise = ({ handleOrderPopup }) => {
   };
 
   return (
-    <div className="relative overflow-hidden min-h-[450px] sm:min-h-[650px] bg-gray-100 flex justify-center items-center dark:bg-gray-950 dark:text-white duration-200">
+    <div className="relative overflow-hidden min-h-[550px] sm:min-h-[650px] bg-gray-100 flex justify-center items-center dark:bg-gray-950 dark:text-white duration-200">
       {/* Background pattern */}
       <div className="h-[400px] w-[400px] sm:h-[700px] sm:w-[700px] bg-orange-300 
-        absolute -top-1/3 sm:-top-1/2 right-0 rounded-3xl rotate-45 -z-10"></div>
+        absolute -top-1/3 sm:-top-1/2 right-0 rounded-3xl rotate-45 z-0"></div>
 
       {/* Remise section */}
       <div className="container pb-8 sm:pb-0">

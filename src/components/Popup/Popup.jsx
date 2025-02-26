@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import { IoCloseOutline, IoMail, IoLockClosed, IoPerson } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 const Popup = ({ orderPopup, setOrderPopup }) => {
   const [registerPopup, setRegisterPopup] = useState(false);
   const [forgotPasswordPopup, setForgotPasswordPopup] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const navigate = useNavigate();
+
+  const handleConnect = () => {
+    setOrderPopup(false);
+    navigate("/Utilisateurs"); // Redirection vers le Dashboard
+  };
 
   return (
     <>
@@ -21,7 +28,7 @@ const Popup = ({ orderPopup, setOrderPopup }) => {
                   onClick={() => setOrderPopup(false)}
                 />
               </div>
-              
+
               {/* Message de succès */}
               {successMessage && (
                 <div className="text-green-500 text-center mb-2">
@@ -62,10 +69,7 @@ const Popup = ({ orderPopup, setOrderPopup }) => {
                 <div className="flex justify-center mt-4">
                   <button
                     className="bg-gradient-to-r from-orange-400 to-orange-600 hover:scale-105 duration-200 text-white py-1 px-4 rounded-full flex items-center gap-2"
-                    onClick={() => {
-                      // Redirection vers le dashboard utilisateur
-                      window.location.href = "/dashboard";
-                    }}
+                    onClick={handleConnect} // Redirection après connexion
                   >
                     Connecter
                   </button>
@@ -88,7 +92,7 @@ const Popup = ({ orderPopup, setOrderPopup }) => {
         </div>
       )}
 
-      {/* Popup d'inscription */}
+      {/* Popup d'inscription avec le champ "Nom" */}
       {registerPopup && (
         <div className="popup">
           <div className="h-screen w-screen fixed top-0 left-0 bg-black/50 z-50 backdrop-blur-sm">
@@ -101,6 +105,7 @@ const Popup = ({ orderPopup, setOrderPopup }) => {
                 />
               </div>
               <div className="mt-4">
+                {/* Champ "Nom" */}
                 <div className="relative mb-4">
                   <IoPerson className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400" />
                   <input
@@ -109,6 +114,7 @@ const Popup = ({ orderPopup, setOrderPopup }) => {
                     className="w-full rounded-full border border-gray-300 dark:border-gray-500 dark:bg-gray-800 pl-8 pr-2 py-1"
                   />
                 </div>
+
                 <div className="relative mb-4">
                   <IoMail className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400" />
                   <input
@@ -135,38 +141,6 @@ const Popup = ({ orderPopup, setOrderPopup }) => {
                     }}
                   >
                     S'inscrire
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Popup mot de passe oublié */}
-      {forgotPasswordPopup && (
-        <div className="popup">
-          <div className="h-screen w-screen fixed top-0 left-0 bg-black/50 z-50 backdrop-blur-sm">
-            <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-4 shadow-md bg-white dark:bg-gray-900 rounded-md duration-200 w-[300px]">
-              <div className="flex items-center justify-between">
-                <h1>Mot de passe oublié</h1>
-                <IoCloseOutline
-                  className="text-2xl cursor-pointer"
-                  onClick={() => setForgotPasswordPopup(false)}
-                />
-              </div>
-              <div className="mt-4">
-                <div className="relative mb-4">
-                  <IoMail className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                  <input
-                    type="email"
-                    placeholder="Entrez votre email"
-                    className="w-full rounded-full border border-gray-300 dark:border-gray-500 dark:bg-gray-800 pl-8 pr-2 py-1"
-                  />
-                </div>
-                <div className="flex justify-center">
-                  <button className="bg-gradient-to-r from-orange-400 to-orange-600 hover:scale-105 duration-200 text-white py-1 px-4 rounded-full flex items-center gap-2">
-                    Réinitialiser
                   </button>
                 </div>
               </div>

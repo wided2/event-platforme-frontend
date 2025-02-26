@@ -1,7 +1,6 @@
 import React from 'react';
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
-
 const Card2 = () => {
   return (
     <div>
@@ -12,7 +11,7 @@ const Card2 = () => {
 </div>
 <Footer/>
 </div>
-  )
-}
+  );
+};
 
 export default Card2

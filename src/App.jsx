@@ -18,9 +18,9 @@ import Card5 from "./components/lesPages/Card5";
 import CardSection from "./components/lesPages/CardSection";
 
 import Popup from "./components/Popup/Popup";
+import Utilisateurs from "./components/Dashbord/Utilisateurs"; // Ajout du Dashboard
 
 const Home = () => {
-  // Déplace l'état ici
   const [orderPopup, setOrderPopup] = useState(false);
 
   const handleOrderPopup = () => {
@@ -35,7 +35,6 @@ const Home = () => {
       <EventsSection />
       <Inscrire />
       <Description />
-     
       <Footer />
       <Popup orderPopup={orderPopup} setOrderPopup={setOrderPopup} />
     </>
@@ -62,6 +61,7 @@ const App = () => {
         <Route path="/Card3" element={<Card3 />} />
         <Route path="/Card4" element={<Card4 />} />
         <Route path="/Card5" element={<Card5 />} />
+        <Route path="/Utilisateurs" element={<Utilisateurs />} /> 
       </Routes>
     </Router>
   );
