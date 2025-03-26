@@ -86,7 +86,7 @@ const EventsSection = () => {
   return (
     <div className="w-full py-10 bg-white">
       <h2 className="text-2xl font-bold text-center text-orange-400 uppercase">
-        Vos évenement
+        Nos évenement
       </h2>
 
       <div className="flex justify-center space-x-2 my-4">

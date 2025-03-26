@@ -1,7 +1,7 @@
 import React from 'react';
 import image from "../../assets/image.jpg";
 
-const Description = () => {
+const TEAM = () => {
   return (
     <div className="relative w-full max-w-5xl mx-auto">
       {/* Background Image */}
@@ -28,4 +28,4 @@ const Description = () => {
   );
 };
 
-export default Description;
+export default TEAM;
