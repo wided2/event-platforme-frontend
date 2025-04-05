@@ -5,20 +5,13 @@ const CRUDcategorie = () => {
   const [categories, setCategories] = useState([
     {
       id: 1,
-      name: "Électronique",
+      name: "Professionnel",
       subcategories: [
-        { id: 101, name: "Téléphones" },
-        { id: 102, name: "Ordinateurs" },
+        { id: 101, name: "Communautaire et Caritatif" },
+        { id: 102, name: "Développement Personnel" },
       ],
     },
-    {
-      id: 2,
-      name: "Vêtements",
-      subcategories: [
-        { id: 201, name: "Homme" },
-        { id: 202, name: "Femme" },
-      ],
-    },
+   
   ]);
 
   // État pour la nouvelle catégorie ou sous-catégorie

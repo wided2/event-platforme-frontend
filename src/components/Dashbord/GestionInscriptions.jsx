@@ -5,16 +5,16 @@ const GestionInscriptions = () => {
   const [inscriptions, setInscriptions] = useState([
     {
       id: 1,
-      nomParticipant: "Alice",
-      email: "alice@example.com",
-      evenement: "Conférence Tech",
+      nomParticipant: "wided",
+      email: "wided1@gmail.com",
+      evenement: " Le coaching",
       statut: "En attente",
     },
     {
       id: 2,
-      nomParticipant: "Bob",
-      email: "bob@example.com",
-      evenement: "Séminaire Culturel",
+      nomParticipant: "med",
+      email: "med@gmail.com",
+      evenement: "Collectes de fonds",
       statut: "En attente",
     },
   ]);

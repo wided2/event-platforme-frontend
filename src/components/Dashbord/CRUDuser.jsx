@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 const CRUDuser = () => {
   const [users, setUsers] = useState([
-    { id: 1, name: "John Doe", email: "john@example.com", password: "password123" },
-    { id: 2, name: "Jane Smith", email: "jane@example.com", password: "securepass" },
+    { id: 1, name: "wided", email: "wided1@gmail.com", password: "password123" },
+    { id: 2, name: "med", email: "med@gmail.com", password: "securepass" },
   ]);
   const [newUser, setNewUser] = useState({ name: "", email: "", password: "" });
   const [editingUser, setEditingUser] = useState(null);
