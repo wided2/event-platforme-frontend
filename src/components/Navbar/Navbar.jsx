@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Pour la redirection
 import Logo from "../../assets/logo4.png";
 import { IoMdSearch } from "react-icons/io";
@@ -20,34 +20,48 @@ const Navbar = ({ handleOrderPopup }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(
     localStorage.getItem("user") ? true : false
-  ); // Vérifie si l'utilisateur est connecté
+  );
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const profileRef = useRef(null);
 
   // Met à jour l'état si localStorage change
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
-      setIsAuthenticated(true); // Utilisateur déjà connecté
+      setIsAuthenticated(true);
     } else {
-      setIsAuthenticated(false); // Pas encore connecté
+      setIsAuthenticated(false);
     }
+  }, []);
+
+  // Ferme le dropdown si l'utilisateur clique en dehors
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setProfileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   // Fonction de connexion
   const handleLogin = () => {
-    // Simule une connexion (par exemple, un appel API pour une vraie connexion)
-    localStorage.setItem("user", "true"); // Stocke l'état connecté
-    setIsAuthenticated(true); // Mets l'état à vrai lorsque l'utilisateur est authentifié
-    handleOrderPopup(); // Affiche le formulaire de connexion ou effectue une action supplémentaire
+    localStorage.setItem("user", "true");
+    setIsAuthenticated(true);
+    handleOrderPopup();
   };
 
   // Fonction de déconnexion
   const handleLogout = () => {
-    localStorage.removeItem("user"); // Supprime l'état connecté
+    localStorage.removeItem("user");
     setIsAuthenticated(false);
     setProfileMenuOpen(false);
-    navigate("/"); // Retour à la page d'accueil
+    navigate("/");
   };
 
   return (
@@ -57,7 +71,7 @@ const Navbar = ({ handleOrderPopup }) => {
         <div className="container flex justify-between items-center px-4 sm:px-6 py-3">
           {/* Logo + EVENT */}
           <div className="flex items-center gap-x-2">
-            <Link to="/" className="font-bold text-2xl sm:text-3xl flex items-center gap-x-2">
+            <Link to="/" className="font-bold text-xl sm:text-2xl flex items-center gap-x-2">
               <img src={Logo} alt="Logo" className="w-12 sm:w-16 h-12 sm:h-16 object-contain" />
               <span className="text-white tracking-wide">EVENT</span>
             </Link>
@@ -82,7 +96,7 @@ const Navbar = ({ handleOrderPopup }) => {
             </div>
 
             {/* Profile button / Dropdown */}
-            <div className="relative">
+            <div className="relative" ref={profileRef}>
               {isAuthenticated ? (
                 // Si connecté, bouton "Mon Profil"
                 <button
@@ -95,26 +109,25 @@ const Navbar = ({ handleOrderPopup }) => {
               ) : (
                 // Si non connecté, bouton "Connecté"
                 <button
-                  onClick={() => {
-                    handleOrderPopup(); // Afficher le formulaire de connexion
-                    handleLogin(); // Simuler la connexion
-                  }}
+                  onClick={handleLogin}
                   className="bg-white text-orange-600 px-4 py-2 rounded-full flex items-center gap-2 shadow-md hover:bg-orange-100 transition-all"
                 >
                   <CgProfile className="text-xl" />
-                  <span className="hidden sm:inline">Connecté</span>
+                  <span className="hidden sm:inline">Connexion</span>
                 </button>
               )}
 
               {/* Dropdown Menu */}
               {isAuthenticated && profileMenuOpen && (
                 <div className="absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg">
-                 <Link to="/UpdateProfil" className="block px-4 py-2 text-gray-700 hover:bg-gray-200">
-                  Mon Profil
+                  <Link
+                    to="/UpdateProfil"
+                    className="block px-4 py-2 text-gray-700 hover:bg-gray-200"
+                  >
+                    Mon Profil
                   </Link>
-
                   <button
-                    onClick={handleLogout} // Déconnexion
+                    onClick={handleLogout}
                     className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-200"
                   >
                     Déconnexion
@@ -127,11 +140,17 @@ const Navbar = ({ handleOrderPopup }) => {
       </div>
 
       {/* Lower Navbar */}
-      <div className={`sm:flex justify-center ${menuOpen ? "block" : "hidden"} bg-gray-100 dark:bg-gray-800 py-3`}>
-        <ul className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 text-gray-700 dark:text-gray-300 font-medium">
+      <div
+        className={`${
+          menuOpen ? "block" : "hidden"
+        } sm:flex justify-center bg-gray-100 dark:bg-gray-800 py-3 transition-all duration-300`}
+      >
+        <ul className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 text-gray-700 dark:text-gray-300 font-medium text-sm">
           {Menu.map((item) => (
             <li key={item.id} className="hover:text-orange-600 transition-all">
-              <Link to={item.link} className="px-3">{item.name}</Link>
+              <Link to={item.link} className="px-3">
+                {item.name}
+              </Link>
             </li>
           ))}
         </ul>

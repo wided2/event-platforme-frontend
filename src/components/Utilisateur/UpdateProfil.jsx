@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
 
 const UpdateProfil = () => {
   // État pour les données du profil
@@ -100,7 +102,10 @@ const UpdateProfil = () => {
   };
 
   return (
+    <div className="bg-gray-50 min-h-screen">
+      <Navbar />
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
+     
       <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-md">
         {/* Affichage des messages de confirmation ou d'erreur */}
         {message && (
@@ -240,6 +245,8 @@ const UpdateProfil = () => {
           )}
         </div>
       </div>
+    </div>
+    <Footer/>
     </div>
   );
 };
