@@ -14,10 +14,7 @@ const CRUDevenement = () => {
     endDate: "",
     location: "",
     capacity: "",
-    status: "Brouillon",
-    creatorId: "1", // Simule l'ID du créateur
     creationDate: "",
-    modificationDate: "",
     price: "",
   });
 
@@ -35,10 +32,7 @@ const CRUDevenement = () => {
       endDate: "",
       location: "",
       capacity: "",
-      status: "Brouillon",
-      creatorId: "1",
       creationDate: "",
-      modificationDate: "",
       price: "",
     });
     setEditingEvent(null);
@@ -48,7 +42,8 @@ const CRUDevenement = () => {
   const validateEvent = (event) => {
     if (!event.name.trim()) return "Le nom de l'événement est requis.";
     if (!event.category.trim()) return "La catégorie est requise.";
-    if (!event.startDate || !event.endDate) return "Les dates de début et de fin sont requises.";
+    if (!event.startDate || !event.endDate)
+      return "Les dates de début et de fin sont requises.";
     if (new Date(event.startDate) > new Date(event.endDate))
       return "La date de début doit être antérieure à la date de fin.";
     if (!event.location.trim()) return "Le lieu est requis.";
@@ -69,7 +64,6 @@ const CRUDevenement = () => {
       ...newEvent,
       id: Date.now().toString(), // Génère un ID unique basé sur le timestamp
       creationDate: new Date().toISOString(),
-      modificationDate: new Date().toISOString(),
     };
 
     setEvents([...events, eventToAdd]);
@@ -92,12 +86,7 @@ const CRUDevenement = () => {
     }
 
     const updatedEvents = events.map((event) =>
-      event.id === editingEvent
-        ? {
-            ...newEvent,
-            modificationDate: new Date().toISOString(),
-          }
-        : event
+      event.id === editingEvent ? { ...newEvent } : event
     );
 
     setEvents(updatedEvents);
@@ -111,6 +100,12 @@ const CRUDevenement = () => {
       if (editingEvent === eventId) resetForm(); // Réinitialiser le formulaire si l'événement en cours d'édition est supprimé
       alert("Événement supprimé avec succès !");
     }
+  };
+
+  // Fonction pour formater les dates
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
   return (
@@ -187,7 +182,7 @@ const CRUDevenement = () => {
       </form>
 
       {/* Liste des événements */}
-      <table className="w-full border-collapse">
+      <table className="w-full border-collapse mt-6">
         <thead>
           <tr className="bg-orange-100">
             <th className="p-2 border">ID</th>
@@ -197,10 +192,6 @@ const CRUDevenement = () => {
             <th className="p-2 border">Dates</th>
             <th className="p-2 border">Lieu</th>
             <th className="p-2 border">Capacité</th>
-            <th className="p-2 border">État</th>
-            <th className="p-2 border">Créateur</th>
-            <th className="p-2 border">Création</th>
-            <th className="p-2 border">Modification</th>
             <th className="p-2 border">Prix</th>
             <th className="p-2 border">Actions</th>
           </tr>
@@ -213,19 +204,10 @@ const CRUDevenement = () => {
               <td className="p-2 border">{event.description}</td>
               <td className="p-2 border">{event.category}</td>
               <td className="p-2 border">
-                {new Date(event.startDate).toLocaleString()} -{" "}
-                {new Date(event.endDate).toLocaleString()}
+                {formatDate(event.startDate)} - {formatDate(event.endDate)}
               </td>
               <td className="p-2 border">{event.location}</td>
               <td className="p-2 border">{event.capacity}</td>
-              <td className="p-2 border">{event.status}</td>
-              <td className="p-2 border">{event.creatorId}</td>
-              <td className="p-2 border">
-                {new Date(event.creationDate).toLocaleString()}
-              </td>
-              <td className="p-2 border">
-                {new Date(event.modificationDate).toLocaleString()}
-              </td>
               <td className="p-2 border">{event.price || "Gratuit"}</td>
               <td className="p-2 border">
                 <button
