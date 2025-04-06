@@ -19,10 +19,6 @@ const CRUDevenement = () => {
     creationDate: "",
     modificationDate: "",
     price: "",
-    registrationLink: "",
-    qrCode: "",
-    mainImage: "",
-    tags: [],
   });
 
   // État pour gérer l'édition
@@ -44,10 +40,6 @@ const CRUDevenement = () => {
       creationDate: "",
       modificationDate: "",
       price: "",
-      registrationLink: "",
-      qrCode: "",
-      mainImage: "",
-      tags: [],
     });
     setEditingEvent(null);
   };
@@ -55,6 +47,7 @@ const CRUDevenement = () => {
   // Validation du formulaire
   const validateEvent = (event) => {
     if (!event.name.trim()) return "Le nom de l'événement est requis.";
+    if (!event.category.trim()) return "La catégorie est requise.";
     if (!event.startDate || !event.endDate) return "Les dates de début et de fin sont requises.";
     if (new Date(event.startDate) > new Date(event.endDate))
       return "La date de début doit être antérieure à la date de fin.";
@@ -115,6 +108,8 @@ const CRUDevenement = () => {
   const deleteEvent = (eventId) => {
     if (window.confirm("Êtes-vous sûr de vouloir supprimer cet événement ?")) {
       setEvents(events.filter((event) => event.id !== eventId));
+      if (editingEvent === eventId) resetForm(); // Réinitialiser le formulaire si l'événement en cours d'édition est supprimé
+      alert("Événement supprimé avec succès !");
     }
   };
 
@@ -123,7 +118,7 @@ const CRUDevenement = () => {
       <h2 className="text-xl font-semibold text-orange-400 mb-4">Gérer les Événements</h2>
 
       {/* Formulaire pour ajouter ou modifier un événement */}
-      <div className="mb-6">
+      <form className="mb-6">
         <input
           type="text"
           placeholder="Nom de l'événement"
@@ -170,23 +165,26 @@ const CRUDevenement = () => {
           type="number"
           placeholder="Capacité maximale"
           value={newEvent.capacity}
-          onChange={(e) => setNewEvent({ ...newEvent, capacity: e.target.value })}
+          onChange={(e) => setNewEvent({ ...newEvent, capacity: Number(e.target.value) })}
           className="border border-gray-300 rounded px-3 py-2 w-full mb-2"
         />
         <input
           type="number"
           placeholder="Prix (0 pour gratuit)"
           value={newEvent.price}
-          onChange={(e) => setNewEvent({ ...newEvent, price: e.target.value })}
+          onChange={(e) => setNewEvent({ ...newEvent, price: Number(e.target.value) })}
           className="border border-gray-300 rounded px-3 py-2 w-full mb-2"
         />
         <button
-          onClick={editingEvent ? updateEvent : addEvent}
+          onClick={(e) => {
+            e.preventDefault(); // Empêche le rechargement de la page
+            editingEvent ? updateEvent() : addEvent();
+          }}
           className="mt-4 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600"
         >
           {editingEvent ? "Mettre à jour" : "Ajouter"}
         </button>
-      </div>
+      </form>
 
       {/* Liste des événements */}
       <table className="w-full border-collapse">
@@ -204,10 +202,6 @@ const CRUDevenement = () => {
             <th className="p-2 border">Création</th>
             <th className="p-2 border">Modification</th>
             <th className="p-2 border">Prix</th>
-            <th className="p-2 border">Lien Inscription</th>
-            <th className="p-2 border">QR Code</th>
-            <th className="p-2 border">Image</th>
-            <th className="p-2 border">Tags</th>
             <th className="p-2 border">Actions</th>
           </tr>
         </thead>
@@ -233,24 +227,6 @@ const CRUDevenement = () => {
                 {new Date(event.modificationDate).toLocaleString()}
               </td>
               <td className="p-2 border">{event.price || "Gratuit"}</td>
-              <td className="p-2 border">
-                {event.registrationLink ? (
-                  <a href={event.registrationLink} target="_blank" rel="noopener noreferrer">
-                    Lien
-                  </a>
-                ) : (
-                  "N/A"
-                )}
-              </td>
-              <td className="p-2 border">{event.qrCode || "N/A"}</td>
-              <td className="p-2 border">
-                {event.mainImage ? (
-                  <img src={event.mainImage} alt="Événement" className="w-10 h-10 object-cover" />
-                ) : (
-                  "N/A"
-                )}
-              </td>
-              <td className="p-2 border">{event.tags.join(", ") || "Aucun"}</td>
               <td className="p-2 border">
                 <button
                   onClick={() => editEvent(event.id)}
