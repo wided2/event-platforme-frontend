@@ -11,6 +11,8 @@ import CardSection from "./components/lesPages/CardSection";
 import CookieConsent from "./components/Cookie/CookieConsent";
 import Admin from "./components/Dashbord/Admin";
 import Gestionnaire from "./components/Dashbord/Gestionnaire";
+import { Toaster } from 'react-hot-toast';
+
 
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -28,7 +30,7 @@ import Sport from "./components/Categorie/Sport";
 import Professionnel from "./components/Categorie/Professionnel";
 import Marches from "./components/Categorie/Marches";
 import Communautaire from "./components/Categorie/Communautaire";
-
+import Event from "./components/Event";
 
 
 
@@ -100,7 +102,8 @@ const App = () => {
         <Route path="/Admin" element={<Admin />} />
         <Route path="/Gestionnaire" element={<Gestionnaire />} />
         <Route path="/UpdateProfil" element={<UpdateProfil/>} />
-
+        <Route path="/evenements" element={<Event/>} />
+        
        
 
       </Routes>
